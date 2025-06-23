@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHand</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            50% {
+                background: rgba(255, 255, 255, 0.15);
+            }
+
+            100% {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        .wrapper {
+            position: relative;
+            width: 750px;
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            color: white;
+            padding: 40px 35px 55px;
+            margin: 0 10px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5),
+                inset 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: gradientBG 6s infinite alternate ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .input-box .input-field {
+            position: relative;
+            width: 47%;
+            margin: 13px 0;
+        }
+
+        .input-box .input-field input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid white;
+            outline: none;
+            font-size: 1em;
+            color: white;
+            padding: 15px 35px 15px 7px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        #check{
+            text-align: center;
+        }
+
+        .input-box .input-field input:focus {
+            border-bottom: 2px solid #ff66b2;
+        }
+
+        .input-box .input-field input::placeholder {
+            color: white;
+            opacity: 1;
+        }
+
+        .input-box .input-field i {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            color: white;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .remember-forgot label input {
+            accent-color: #fa709a;
+            margin-right: 7px;
+        }
+
+        .wrapper .btn {
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(90deg, #fa709a, #ff66b2);
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1em;
+            color: white;
+            font-weight: 500;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .wrapper .btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 576px) {
+            .input-box .input-field {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form>
+            <h1>Registration Page</h1>
+            <p id="check"></p>
+            <div class="input-box">
+                <div class="input-field">
+                    <i class='bx bxs-user'></i>
+                    <input type="text" placeholder="Username" id="username" required>
+                </div>
+                <div class="input-field">
+                    <i class='bx bxs-envelope'></i>
+                    <input type="email" placeholder="Email" id="email" required>
+                </div>
+                <div class="input-field">
+                    <i class='bx bxs-phone'></i>
+                    <input type="tel" placeholder="Phone Number" id="pnumber" required pattern="[0-9]{10}">
+                </div>
+                <div class="input-field">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="password" placeholder="Password" id="password" required>
+                </div>
+            </div>
+            <br>
+            <div class="remember-forgot">
+                <label><input type="checkbox" name="declaration"> Please tick the above check box.</label>
+            </div>
+            <br>
+            <button type="submit" class="btn" id="submit">Register</button>
+            <br>
+        </form>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCr_FYDjO57yPT3wTix8RKeuZaf5LgU2fI",
+            authDomain: "pr391-49424.firebaseapp.com",
+            projectId: "pr391-49424",
+            storageBucket: "pr391-49424.firebasestorage.app",
+            messagingSenderId: "929788894351",
+            appId: "1:929788894351:web:a879913520e99acf8d24fa"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const submit = document.getElementById('submit');
+        submit.addEventListener("click", async function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const pnumber = document.getElementById('pnumber').value;
+            const password = document.getElementById('password').value;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                document.querySelector("#check").innerText = "Account Created Successfully";
+                window.location.href="/login";
+            } catch (error) {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                
+                document.querySelector("#check").innerText = "Error Formed. Please try again!";
+            }
+        });
+    </script>
+</body>
+
+</html>

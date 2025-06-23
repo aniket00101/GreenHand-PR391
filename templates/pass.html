@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHand</title>
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            overflow: hidden;
+        }
+        .wrapper {
+            position: relative;
+            width: 380px;
+            padding: 25px;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease-in-out;
+        }
+        .wrapper:hover {
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        h2 {
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+        .input-box {
+            position: relative;
+            width: 100%;
+            margin: 20px 0;
+            border-bottom: 2px solid white;
+        }
+        .input-box input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .input-box .icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 1.3em;
+        }
+        button {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(90deg, #fa709a, #ff66b2);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ff66b2, #ff1493);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.9);
+        }
+        .register-link {
+            text-align: center;
+            color: white;
+            margin: 15px 0;
+        }
+        a, a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        input::placeholder {
+            font-size: 16px;
+            color: white;
+            font-weight: normal;
+            opacity: 1;
+        }
+        @media (max-width: 576px) {
+            .wrapper {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="resetForm">
+            <h2>Reset Password</h2>
+            <p style="text-align: center; font-size: 14px;">Enter your email and we'll send you a reset link.</p>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <br>
+            <button type="submit">Send Reset Link</button><br>
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCr_FYDjO57yPT3wTix8RKeuZaf5LgU2fI",
+            authDomain: "pr391-49424.firebaseapp.com",
+            projectId: "pr391-49424",
+            storageBucket: "pr391-49424.firebasestorage.app",
+            messagingSenderId: "929788894351",
+            appId: "1:929788894351:web:a879913520e99acf8d24fa"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        document.getElementById('resetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            
+            try {
+                await sendPasswordResetEmail(auth, email);
+                document.getElementById('message').innerText = `Password reset link sent to ${email}`;
+                document.getElementById('message').style.color = 'White';
+            } catch (error) {
+                document.getElementById('message').innerText = `Error: ${error.message}`;
+                document.getElementById('message').style.color = 'white';
+            }
+        });
+    </script>
+</body>
+</html>

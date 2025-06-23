@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHand</title>
+</head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #ff8a00;
+            --secondary-color: #fa709a;
+            --text-color: white;
+            --bg-color: linear-gradient(135deg, #1a1a2e, #302b63, #0f0c29);
+            --bg-card: rgba(255, 255, 255, 0.1);
+            --header-bg: rgba(26, 26, 46, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 100px; /* this pushes content below navbar */
+            margin: 0 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+        width: 100%;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: var(--header-bg);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: var(--primary-color);
+    }
+
+    .menu-icon {
+        display: none;
+        font-size: 30px;
+        cursor: pointer;
+        color: var(--text-color);
+    }
+    #under {
+        color: #ff8a00;
+    }
+
+
+    @media (max-width: 768px) {
+        header {
+            padding: 10px 5%;
+        }
+
+        .logo {
+            font-size: 22px;
+        }
+
+        .menu-icon {
+            display: block;
+        }
+
+        nav ul {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav ul.active {
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+    }
+
+        #weather-container {
+            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+            max-width: 350px; /* Increased from 350px */
+            padding: 35px;    /* Increased from 15px */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 120px;
+        }
+
+        h2,
+        label,
+        p {
+            color: white;
+            margin: 8px 0;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 50px;
+            border: 1px solid white;
+            margin-top: 20px;
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            caret-color: white;
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ccc;
+        }
+
+        button {
+            background: rgb(255, 105, 180);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100px;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: rgb(179, 62, 146);
+        }
+
+        #temp-div {
+            margin-top: 25px;
+        }
+
+        #temp-div p {
+            font-size: 50px;
+            margin-top: -20px;
+        }
+        
+        #under {
+            color: #ff8a00;
+        }
+
+        #weather-info {
+            font-size: 18px;
+        }
+
+        #hourly-forecast {
+            margin-top: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hourly-item {
+            flex: 0 0 auto;
+            width: 70px; /* Reduced width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 5px; /* Reduced margin-right */
+            color: white;
+        }
+
+        .hourly-item img {
+            width: 25px; /* Reduced width */
+            height: 25px; /* Reduced height */
+            margin-bottom: 3px; /* Reduced margin-bottom */
+        }
+
+        #hourly-heading {
+            color: white;
+            margin-top: 5px; /* Reduced margin-top */
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: color 0.3s;
+            padding: 0;
+        }
+
+        .nav-button:hover {
+            color: var(--primary-color);
+        }
+
+    </style>
+
+<header>
+    <div class="logo">GreenHand</div>
+    <nav>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-links">
+            <li><a href="/cropprediction">Crop Prediction</a></li>
+            <li><a href="/cropdetail">Crop Price Prediction</a></li>
+            <li><a href="/myfarm">My Farm</a></li>
+            <li><a href="/weather">Weather Forecast</a></li>
+            <li><a><button onclick="handleLogout()" style="background:transparent; color: white; border: none; font-size: 14px;">Logout</button></a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <div id="weather-container">
+        <h2>Weather Detail</h2>
+        <br>
+        <input type="text" id="city" placeholder="Enter the city" required>
+        <button onclick="getWeather()">Search</button>
+        <br>
+        <div id="temp-div"></div>
+        <div id="weather-info"></div>
+        <div id="hourly-forecast"></div>
+    </div>
+</body>
+<script>
+    function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    function getWeather() {
+        const apikey = '5cae1799510922b974f83bedf2ae9c4d';
+        const city = document.getElementById('city').value;
+        if (!city) {
+            alert('Please enter a city');
+            return;
+        }
+        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apikey}`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apikey}`;
+
+
+        fetch(currentWeatherUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                console.error('Error fetching current weather data: ', error);
+                alert('Error fetching current weather data. Please try again');
+            });
+        fetch(forecastUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayHourlyForecast(data.list);
+            })
+            .catch(error => {
+                console.error('Error fetching hourly forecast data: ', error);
+                alert('Error fetching hourly forecast data. Please try again');
+            });
+    }
+
+    function displayWeather(data) {
+        const tempDivInfo = document.getElementById('temp-div');
+        const weatherInfoDiv = document.getElementById('weather-info');
+
+        weatherInfoDiv.innerHTML = '';
+        tempDivInfo.innerHTML = '';
+
+        if (data.cod === '404') {
+            weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
+        } else {
+            const cityName = data.name;
+            const temperature = Math.round(data.main.temp);
+
+            const description = data.weather[0].description;
+            const temperatureHTML = `<p>${temperature}°C</p>`;
+            const weatherHTML = `<p>${cityName}</p><br><p>${description}</p>`;
+            tempDivInfo.innerHTML = temperatureHTML;
+            weatherInfoDiv.innerHTML = weatherHTML;
+        }
+    }
+
+    function displayHourlyForecast(hourlyData) {
+        const hourlyForecastDiv = document.getElementById('hourly-forecast');
+        hourlyForecastDiv.innerHTML = '';
+
+        const next24Hours = hourlyData.slice(0, 8);
+        next24Hours.forEach(item => {
+            const dateTime = new Date(item.dt * 1000);
+            const hour = dateTime.getHours();
+            const temperature = Math.round(item.main.temp);
+
+            const iconCode = item.weather[0].icon;
+            const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+            const hourlyItemHtml = `
+                <div class="hourly-item">
+                    <span>${hour}:00</span>
+                    <img src="${iconUrl}" alt="Hourly Weather Icon">
+                    <span>${temperature}°C</span>
+                    <br><br>
+                </div>
+            `;
+            hourlyForecastDiv.insertAdjacentHTML('beforeend', hourlyItemHtml);
+        });
+    }
+</script>
+<script src="{{ url_for('static', filename='huhi.js') }}"></script>
+</html>

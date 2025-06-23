@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenHand</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    :root {
+      --primary-color: #ff8a00;
+      --secondary-color: #fa709a;
+      --text-color: white;
+      --bg-color: linear-gradient(135deg, #1a1a2e, #302b63, #0f0c29);
+      --bg-card: rgba(255, 255, 255, 0.1);
+      --header-bg: rgba(26, 26, 46, 0.9);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+    header {
+      width: 100%;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    .menu-icon {
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+    #under {
+      color: #ff8a00;
+    }
+    .container {
+      background: var(--bg-card);
+      border-radius: 15px;
+      padding: 30px 25px;
+      max-width: 700px;
+      width: 90%;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+    .sensor-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .sensor-card:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .sensor-card h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+    }
+    .sensor-card p {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 22px;
+      }
+      .menu-icon {
+        display: block;
+      }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(26, 26, 46, 0.95);
+        text-align: center;
+        padding: 20px 0;
+      }
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 15px 0;
+      }
+
+      .container {
+        padding: 20px;
+        width: 95%;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">GreenHand</div>
+    <nav>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="/cropprediction">Crop Prediction</a></li>
+            <li><a href="/cropdetail">Crop Price Prediction</a></li>
+            <li><a href="/myfarm">My Farm</a></li>
+            <li><a href="/weather">Weather Forecast</a></li>
+            <li><a><button onclick="handleLogout()" style="background:transparent; color: white; border: none; font-size: 14px;">Logout</button></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>My Farm Sensor Data</h2>
+    <div class="sensor-grid">
+        <div class="sensor-card">
+          <h3>Nitrogen</h3>
+          <p>45 mg/kg</p> 
+        </div>
+
+        <div class="sensor-card">
+          <h3>Potassium</h3>
+          <p>180 mg/kg</p> 
+        </div>
+
+        <div class="sensor-card">
+          <h3>Phosphorus</h3>
+          <p>35 mg/kg</p> 
+        </div>
+
+        <div class="sensor-card">
+          <h3>Temperature</h3>
+          <p>26.5 °C</p>
+        </div>
+
+        <div class="sensor-card">
+          <h3>Humidity</h3>
+          <p>65 %</p> 
+        </div>
+
+        <div class="sensor-card">
+          <h3>Light Intensity</h3>
+          <p>750 lux</p> 
+        </div>
+
+        <div class="sensor-card">
+          <h3>Ammonia (NH₃)</h3>
+          <p>5 ppm</p> 
+        </div>  
+
+        <div class="sensor-card">
+          <h3>Soil Moisture</h3>
+          <p>38 %</p> 
+        </div>  
+
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  </script>
+<script src="{{ url_for('static', filename='huhi.js') }}"></script>
+</body>
+</html>
