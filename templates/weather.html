@@ -1,77 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenHand</title>
-</head>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenHand</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-        :root {
-            --primary-color: #ff8a00;
-            --secondary-color: #fa709a;
-            --text-color: white;
-            --bg-color: linear-gradient(135deg, #1a1a2e, #302b63, #0f0c29);
-            --bg-card: rgba(255, 255, 255, 0.1);
-            --header-bg: rgba(26, 26, 46, 0.9);
-        }
+    :root {
+      --primary-color: #ff8a00;
+      --secondary-color: #fa709a;
+      --text-color: white;
+      --bg-color: linear-gradient(135deg, #1a1a2e, #302b63, #0f0c29);
+      --header-bg: rgba(26, 26, 46, 0.9);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding-top: 100px; /* this pushes content below navbar */
-            margin: 0 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-top: 100px;
+      margin: 0 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        header {
-        width: 100%;
-        padding: 15px 5%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background: var(--header-bg);
-        backdrop-filter: blur(10px);
-        z-index: 100;
+    header {
+      width: 100%;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      z-index: 100;
     }
 
     .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: var(--primary-color);
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
     }
 
     nav {
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
     }
 
     nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li {
-        margin: 0 10px;
+      margin: 0 10px;
     }
 
     nav ul li a {
@@ -82,200 +79,162 @@
     }
 
     nav ul li a:hover {
-        color: var(--primary-color);
+      color: var(--primary-color);
     }
 
     .menu-icon {
-        display: none;
-        font-size: 30px;
-        cursor: pointer;
-        color: var(--text-color);
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+      color: var(--text-color);
     }
-    #under {
-        color: #ff8a00;
-    }
-
 
     @media (max-width: 768px) {
-        header {
-            padding: 10px 5%;
-        }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-        .logo {
-            font-size: 22px;
-        }
+      .menu-icon {
+        display: block;
+      }
 
-        .menu-icon {
-            display: block;
-        }
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+      }
 
-        nav ul {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            width: 100%;
-            background: rgba(26, 26, 46, 0.95);
-            text-align: center;
-            padding: 20px 0;
-        }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(26, 26, 46, 0.95);
+        padding: 20px 0;
+      }
 
-        nav ul.active {
-            display: flex;
-        }
+      nav ul.active {
+        display: flex;
+      }
 
-        nav ul li {
-            margin: 15px 0;
-        }
+      nav ul li {
+        margin: 15px 20px;
+      }
     }
 
-        #weather-container {
-            background: rgba(255, 255, 255, 0.1);
-            text-align: center;
-            max-width: 350px; /* Increased from 350px */
-            padding: 35px;    /* Increased from 15px */
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 120px;
-        }
+    #weather-container {
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      max-width: 350px;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 120px;
+    }
 
-        h2,
-        label,
-        p {
-            color: white;
-            margin: 8px 0;
-        }
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      border-radius: 50px;
+      border: 1px solid white;
+      margin-top: 20px;
+      background-color: transparent;
+      color: white;
+      font-size: 16px;
+      caret-color: white;
+    }
 
-        input {
-            width: calc(100% - 16px);
-            padding: 8px;
-            box-sizing: border-box;
-            border-radius: 50px;
-            border: 1px solid white;
-            margin-top: 20px;
-            background-color: transparent;
-            color: white;
-            font-size: 16px;
-            caret-color: white;
-        }
+    input::placeholder {
+      color: white;
+    }
 
-        input::placeholder {
-            color: white;
-        }
+    input:focus {
+      outline: none;
+      border-color: #ccc;
+    }
 
-        input:focus {
-            outline: none;
-            border-color: #ccc;
-        }
+    button {
+      background: rgb(255, 105, 180);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100px;
+      font-size: 15px;
+    }
 
-        button {
-            background: rgb(255, 105, 180);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 20px;
-            width: 100px;
-            font-size: 15px;
-        }
+    button:hover {
+      background: rgb(179, 62, 146);
+    }
 
-        button:hover {
-            background: rgb(179, 62, 146);
-        }
+    #temp-div {
+      margin-top: 25px;
+    }
 
-        #temp-div {
-            margin-top: 25px;
-        }
+    #temp-div p {
+      font-size: 50px;
+      margin-top: -20px;
+    }
 
-        #temp-div p {
-            font-size: 50px;
-            margin-top: -20px;
-        }
-        
-        #under {
-            color: #ff8a00;
-        }
+    #weather-info {
+      font-size: 18px;
+    }
 
-        #weather-info {
-            font-size: 18px;
-        }
+    #hourly-forecast {
+      margin-top: 30px;
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      justify-content: space-between;
+    }
 
-        #hourly-forecast {
-            margin-top: 30px;
-            overflow-x: auto;
-            white-space: nowrap;
-            display: flex;
-            justify-content: space-between;
-        }
+    .hourly-item {
+      flex: 0 0 auto;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 5px;
+      color: white;
+    }
 
-        .hourly-item {
-            flex: 0 0 auto;
-            width: 70px; /* Reduced width */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 5px; /* Reduced margin-right */
-            color: white;
-        }
+    .hourly-item img {
+      width: 25px;
+      height: 25px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
 
-        .hourly-item img {
-            width: 25px; /* Reduced width */
-            height: 25px; /* Reduced height */
-            margin-bottom: 3px; /* Reduced margin-bottom */
-        }
-
-        #hourly-heading {
-            color: white;
-            margin-top: 5px; /* Reduced margin-top */
-        }
-
-        .nav-button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 16px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: color 0.3s;
-            padding: 0;
-        }
-
-        .nav-button:hover {
-            color: var(--primary-color);
-        }
-
-    </style>
-
-<header>
+<body>
+  <header>
     <div class="logo">GreenHand</div>
     <nav>
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <ul id="nav-links">
-            <li><a href="/cropprediction">Crop Prediction</a></li>
-            <li><a href="/cropdetail">Crop Price Prediction</a></li>
-            <li><a href="/myfarm">My Farm</a></li>
-            <li><a href="/weather">Weather Forecast</a></li>
-            <li><a><button onclick="handleLogout()" style="background:transparent; color: white; border: none; font-size: 14px;">Logout</button></a></li>
-        </ul>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="/cropprediction">Crop Prediction</a></li>
+        <li><a href="/cropdetail">Crop Price Prediction</a></li>
+        <li><a href="/myfarm">My Farm</a></li>
+        <li><a href="/weather">Weather Forecast</a></li>
+        <li><a href="#" onclick="handleLogout()">Logout</a></li>
+      </ul>
     </nav>
-</header>
-<body>
-    <div id="weather-container">
-        <h2>Weather Detail</h2>
-        <br>
-        <input type="text" id="city" placeholder="Enter the city" required>
-        <button onclick="getWeather()">Search</button>
-        <br>
-        <div id="temp-div"></div>
-        <div id="weather-info"></div>
-        <div id="hourly-forecast"></div>
-    </div>
-</body>
-<script>
+  </header>
+
+  <div id="weather-container">
+    <h2>Weather Detail</h2>
+    <input type="text" id="city" placeholder="Enter the city" required />
+    <button onclick="getWeather()">Search</button>
+    <div id="temp-div"></div>
+    <div id="weather-info"></div>
+    <div id="hourly-forecast"></div>
+  </div>
+
+  <script>
     function toggleMenu() {
             const navLinks = document.getElementById('nav-links');
             navLinks.classList.toggle('active');
@@ -371,4 +330,5 @@
 </script>
 <script src="{{ url_for('static', filename='huhi.js') }}"></script>
 <script src="{{ url_for('static', filename='lock.js') }}"></script>
+</body>
 </html>

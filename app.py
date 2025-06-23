@@ -44,6 +44,10 @@ def myfarm():
 def weather():
     return render_template("weather.html")
 
+@app.route('/feedback')
+def feedback():
+    return render_template("feedback.html")
+
 @app.route('/login')
 def login():
     return render_template("login.html")
