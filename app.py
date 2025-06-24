@@ -299,7 +299,6 @@ def ticker(item, number):
 
         context = context + '%'
 
-    #print('context: ', context)
     return context
 
 
