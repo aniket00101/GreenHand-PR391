@@ -18,6 +18,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/index')
+def i():
+    return render_template('index.html')
+
 @app.route('/logout', methods=['POST'])
 def logout():
     session.clear()  
