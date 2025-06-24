@@ -1,11 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenHand</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --primary-color: #ff8a00;
+      --text-color: white;
+      --bg-color: linear-gradient(135deg, #1a1a2e, #302b63, #0f0c29);
+      --header-bg: rgba(26, 26, 46, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-top: 100px;
+      margin: 0 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-right: auto;
+      /* Pushes nav to the right */
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(26, 26, 46, 0.95);
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 15px 0;
+      }
+    }
+
+    #weather-container {
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      max-width: 350px;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 120px;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 50px;
+      border: 1px solid white;
+      margin-top: 20px;
+      background-color: transparent;
+      color: white;
+      font-size: 16px;
+      caret-color: white;
+    }
+
+    input::placeholder {
+      color: white;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ccc;
+    }
+
+    button {
+      background: rgb(255, 105, 180);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100px;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: rgb(179, 62, 146);
+    }
+  </style>
 </head>
+
 <body>
-    Feedback Form
+  <header>
+    <div class="logo">GreenHand</div>
+    <nav>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="/index">Home</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="weather-container">
+    <h2>Feedback Form</h2>
+    <p id="successfully"></p>
+    <input type="text" id="message" placeholder="Enter the Feedback" required>
+    <button onclick="submitForm()">Submit</button>
+  </div>
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCr_FYDjO57yPT3wTix8RKeuZaf5LgU2fI",
+      authDomain: "pr391-49424.firebaseapp.com",
+      projectId: "pr391-49424",
+      storageBucket: "pr391-49424.firebasestorage.app",
+      messagingSenderId: "929788894351",
+      appId: "1:929788894351:web:a879913520e99acf8d24fa"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.submitForm = async function submitForm() {
+      const message = document.getElementById('message').value;
+
+      if (message !== "") {
+        try {
+          await addDoc(collection(db, "feedback"), {
+            Message: message
+          });
+          document.getElementById("successfully").innerText = "Your message sent successfully!";
+          document.getElementById("message").value = "";
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          document.getElementById("successfully").innerText = "Error sending message!";
+        }
+      } else {
+        document.getElementById("successfully").innerText = "Please fill the above input fields!";
+      }
+    }
+  </script>
+  <script src="{{ url_for('static', filename='huhi.js') }}"></script>
+  <script src="{{ url_for('static', filename='lock.js') }}"></script>
 </body>
+
 </html>

@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenHand</title>
-    <link
-        href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap'
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap'
         rel='stylesheet'>
     <style>
         * {
@@ -129,9 +128,9 @@
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
         }
 
-        #error{
+        #error {
             text-align: center;
-            color:rgb(229, 217, 217);
+            color: rgb(229, 217, 217);
         }
 
         button:hover {
@@ -181,7 +180,8 @@
     <div class="wrapper">
         <form action="/login" method="post" id="loginForm" autocomplete="off">
             <h2>Login</h2>
-            <br><p id="error"></p>
+            <br>
+            <p id="error"></p>
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail"></ion-icon></span>
                 <input type="email" name="email" placeholder="Email" required id="email">
@@ -227,11 +227,11 @@
                 const user = userCredential.user;
                 window.location.href = "/cropprediction";
             } catch (error) {
-               //const errorCode = error.code;
-               //const errorMessage = error.message;
-               //alert("Login failed: " + errorMessage);
-               // console.error("Login error:", errorCode, errorMessage);
-               document.querySelector("#error").innerText = "  Invalid Username and Password\n";
+                //const errorCode = error.code;
+                //const errorMessage = error.message;
+                //alert("Login failed: " + errorMessage);
+                // console.error("Login error:", errorCode, errorMessage);
+                document.querySelector("#error").innerText = "  Invalid Username and Password\n";
             }
         });
     </script>

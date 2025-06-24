@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenHand</title>
-    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap'
+        rel='stylesheet'>
     <style>
         * {
             margin: 0;
@@ -12,6 +14,7 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+
         body {
             display: flex;
             justify-content: center;
@@ -20,6 +23,7 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             overflow: hidden;
         }
+
         .wrapper {
             position: relative;
             width: 380px;
@@ -31,19 +35,23 @@
             box-shadow: 0 0 30px rgba(255, 105, 180, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
             transition: all 0.4s ease-in-out;
         }
+
         .wrapper:hover {
             box-shadow: 0 0 50px rgba(255, 105, 180, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.3);
         }
+
         h2 {
             text-align: center;
             text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
         }
+
         .input-box {
             position: relative;
             width: 100%;
             margin: 20px 0;
             border-bottom: 2px solid white;
         }
+
         .input-box input {
             width: 100%;
             height: 50px;
@@ -54,6 +62,7 @@
             padding: 10px;
             font-size: 18px;
         }
+
         .input-box .icon {
             position: absolute;
             right: 10px;
@@ -62,6 +71,7 @@
             color: white;
             font-size: 1.3em;
         }
+
         button {
             width: 100%;
             height: 50px;
@@ -75,25 +85,31 @@
             transition: all 0.3s ease-in-out;
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
         }
+
         button:hover {
             background: linear-gradient(90deg, #ff66b2, #ff1493);
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.9);
         }
+
         .register-link {
             text-align: center;
             color: white;
             margin: 15px 0;
         }
-        a, a:hover {
+
+        a,
+        a:hover {
             color: white;
             text-decoration: none;
         }
+
         input::placeholder {
             font-size: 16px;
             color: white;
             font-weight: normal;
             opacity: 1;
         }
+
         @media (max-width: 576px) {
             .wrapper {
                 width: 90%;
@@ -101,6 +117,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="wrapper">
         <form id="resetForm">
@@ -117,7 +134,7 @@
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
         import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
@@ -133,9 +150,9 @@
         const auth = getAuth(app);
         document.getElementById('resetForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const email = document.getElementById('email').value.trim();
-            
+
             try {
                 await sendPasswordResetEmail(auth, email);
                 document.getElementById('message').innerText = `Password reset link sent to ${email}`;
@@ -148,4 +165,5 @@
     </script>
     <script src="{{ url_for('static', filename='lock.js') }}"></script>
 </body>
+
 </html>

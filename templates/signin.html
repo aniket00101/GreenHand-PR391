@@ -84,7 +84,8 @@
             padding: 15px 35px 15px 7px;
             transition: border-color 0.3s ease-in-out;
         }
-        #check{
+
+        #check {
             text-align: center;
         }
 
@@ -195,11 +196,11 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 document.querySelector("#check").innerText = "Account Created Successfully";
-                window.location.href="/login";
+                window.location.href = "/login";
             } catch (error) {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                
+
                 document.querySelector("#check").innerText = "Error Formed. Please try again!";
             }
         });

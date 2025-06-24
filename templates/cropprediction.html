@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreenHand</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -234,7 +235,8 @@
         font-size: 20px;
       }
     }
-        .result-section {
+
+    .result-section {
       margin-top: 30px;
       padding: 20px;
       background: rgba(255, 255, 255, 0.15);
@@ -262,6 +264,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -284,11 +287,12 @@
       }
     }
 
-    .navt:hover{
+    .navt:hover {
       color: var(--primary-color);
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">GreenHand</div>
@@ -351,19 +355,19 @@
     </form>
 
     {% if result %}
-        <div class="result-section">
-            <h5>Recommended Crop for Cultivation:</h5>
-            <p>{{ result }}</p>
-        </div>
+    <div class="result-section">
+      <h5>Recommended Crop for Cultivation:</h5>
+      <p>{{ result }}</p>
+    </div>
     {% endif %}
 
   </div>
 
-    <script>
-      function toggleMenu() {
-        const navLinks = document.getElementById('nav-links');
-        navLinks.classList.toggle('active');
-      }
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -387,8 +391,9 @@
         }
       }
     });
-</script>
-<script src="{{ url_for('static', filename='huhi.js') }}"></script>
-<script src="{{ url_for('static', filename='lock.js') }}"></script>
+  </script>
+  <script src="{{ url_for('static', filename='huhi.js') }}"></script>
+  <script src="{{ url_for('static', filename='lock.js') }}"></script>
 </body>
+
 </html>
