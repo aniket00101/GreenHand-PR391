@@ -563,5 +563,5 @@ def TwelveMonthPrevious(name):
 
 if __name__ == "__main__":
     threading.Thread(target=keep_alive, daemon=True).start()
-    app.run()
+    app.run(debug=False, use_reloader=False)
 
