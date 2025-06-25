@@ -11,17 +11,6 @@ import threading
 import time
 import requests
 
-def keep_alive():
-    while True:
-        try:
-            url = "https://greenhand-pr391.onrender.com"  # Replace with your actual hosted URL
-            res = requests.get(url)
-            print("Pinged successfully:", res.status_code)
-        except Exception as e:
-            print("Ping failed:", str(e))
-        time.sleep(60 * 14)  # Ping every 14 minutes (Render goes idle at 15 min)
-
-
 model = pickle.load(open('model.pkl', 'rb'))
 sc = pickle.load(open('standscaler.pkl', 'rb'))
 ms = pickle.load(open('minmaxscaler.pkl', 'rb'))
@@ -562,6 +551,5 @@ def TwelveMonthPrevious(name):
 
 
 if __name__ == "__main__":
-    threading.Thread(target=keep_alive, daemon=True).start()
-    app.run(debug=False, use_reloader=False)
+    app.run()
 
