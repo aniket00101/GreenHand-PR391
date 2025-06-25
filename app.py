@@ -549,6 +549,20 @@ def TwelveMonthPrevious(name):
         new_crop_price.append(crop_price[i])
     return new_crop_price
 
+# Replace with your deployed app's URL
+URL = 'https://your-app.onrender.com'
+
+def ping_website():
+    try:
+        response = requests.get(URL)
+        print(f"Pinged {URL} - Status Code: {response.status_code}")
+    except Exception as e:
+        print(f"Failed to ping {URL}. Error: {e}")
+
+# Ping every 14 minutes (840 seconds)
+while True:
+    ping_website()
+    time.sleep(840)
 
 if __name__ == "__main__":
     app.run()
