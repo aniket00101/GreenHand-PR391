@@ -89,7 +89,7 @@ Install Dependencies
 
 Library:-         
         
-          includes Flask, pandas, sklearn, etc.
+          includes Flask, pandas, sklearn, matplotlib, seaborn
 
 Data Ready:-
 
