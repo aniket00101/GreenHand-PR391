@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firestore Messages Display</title>
+</head>
+<body>
+  <h2>All Feedback Messages</h2>
+  <ul id="messageList"></ul>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import Firebase libraries for Firestore
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Your Firebase config (Firestore version)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCr_FYDjO57yPT3wTix8RKeuZaf5LgU2fI",
+      authDomain: "pr391-49424.firebaseapp.com",
+      projectId: "pr391-49424",
+      storageBucket: "pr391-49424.appspot.com",
+      messagingSenderId: "929788894351",
+      appId: "1:929788894351:web:a879913520e99acf8d24fa"
+    };
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Get data from the 'feedback' collection
+    const feedbackRef = collection(db, "feedback");
+
+    async function loadMessages() {
+      const messageList = document.getElementById("messageList");
+      messageList.innerHTML = ""; // Clear old content
+      try {
+        const snapshot = await getDocs(feedbackRef);
+        if (snapshot.empty) {
+          messageList.innerHTML = "<li>No messages found</li>";
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const msg = data.Message || "No message";
+          const li = document.createElement("li");
+          li.textContent = `💬 ${msg}`;
+          messageList.appendChild(li);
+        });
+
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+        messageList.innerHTML = "<li>Error fetching messages</li>";
+      }
+    }
+
+    // Load messages on page load
+    loadMessages();
+  </script>
+</body>
+</html>

@@ -32,6 +32,10 @@ def logout():
 def cropprediction():
     return render_template("cropprediction.html")
 
+@app.route('/show')
+def show():
+    return render_template("show.html")
+
 @app.route('/cropdetail')
 def cropdetail():
     context = {
